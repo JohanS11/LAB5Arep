@@ -1,0 +1,10 @@
+db.createUser(
+  {
+    user:"chan",
+    pwd:"chan123",
+    roles:[{
+      role:"readWrite",
+      db:"Arep"
+    }]
+  }
+)

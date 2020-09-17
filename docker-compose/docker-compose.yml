@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  loadbalancer:
+    build:
+      context: ../LoadBalancer
+      dockerfile: Dockerfile
+    depends_on:
+      - web
+    container_name: loadbalancer-arep
+    ports:
+      - "9001:6000"
+  web:
+    build:
+      context: ../SparkWebApp
+      dockerfile: Dockerfile
+    depends_on: 
+      - db
+    ports:
+      - "8080-8082:6000"
+
+  db:
+    image: mongo:latest
+    container_name: arep-mongo
+    environment:
+      MONGO_INITDB_DATABASE: Arep
+      MONGO_INITDB_ROOT_USERNAME: ch4n
+      MONGO_INITDB_ROOT_PASSWORD: ch4n1100
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - mongodb:/data/db
+      - mongodb_config:/data/configdb
+    ports:
+      - 27017:27017
+
+    command: mongod
+
+volumes:
+  mongodb:
+  mongodb_config:
