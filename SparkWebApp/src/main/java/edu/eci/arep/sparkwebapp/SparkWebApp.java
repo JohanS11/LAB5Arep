@@ -20,14 +20,31 @@ public class SparkWebApp {
         get("/GetMessages",(request, response) -> {
             response.status(200);
             response.type("application/json");
-            System.out.println("DATA RETRIEVED " + JsonBuild.toJson(db.retrieveData()));
+            try{
+                System.out.println("DATA SIN FORMAR JSON" + db.retrieveData());
+                System.out.println("DATA RETRIEVED " + JsonBuild.toJson(db.retrieveData()));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
             return JsonBuild.toJson(db.retrieveData());
         });
         post("/GetMessages",(req, response) -> {
-            response.status(200);
+
+
             System.out.println("ADDING TO DATABASE");
-            db.AddMessage(req.body());
-            return "";
+            try{
+                System.out.println("REQUEST BODY "+ req.body());
+                if (JsonBuild.toMessage(req.body()) == null){
+                    response.status(400);
+                }
+                db.AddMessage(JsonBuild.toMessage(req.body()));
+            }catch (Exception e){
+                e.printStackTrace();
+                System.out.println("Failure at jsonBuild");
+            }
+
+            return "Successful post";
         });
 
     }

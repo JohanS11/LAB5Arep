@@ -2,14 +2,18 @@ version: '3'
 
 services:
   loadbalancer:
-    image: chan1100/lab5arep
+    build:
+      context: ../LoadBalancer
+      dockerfile: Dockerfile
     depends_on:
       - web
     container_name: loadbalancer-arep
     ports:
       - "9001:6000"
   web:
-    image : chan1100/webdocker
+    build:
+      context: ../SparkWebApp
+      dockerfile: Dockerfile
     depends_on: 
       - db
     ports:

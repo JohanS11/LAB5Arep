@@ -9,8 +9,8 @@ import java.io.IOException;
 public class HTTPClient {
 
     private OkHttpClient httpClient;
-    private String baseUrl="http://192.168.57.128";
-    private String[] ports={":8080",":8081",":8082"};
+    private String baseUrl="http://localhost";
+    private String[] ports={":4444",":4445",":4446"};
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private int serverNumber=0;
 

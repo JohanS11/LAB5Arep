@@ -1,11 +1,11 @@
 var apiclient = (function () {
 
-    var url = "http://localhost:9001/GetMessages";
-    var conta = 0;
+    var url = "http://localhost:4567/GetMessages";
     function addMessage (){
-        var mensaje=document.getElementById("data").value;
-        axios.post(url,mensaje)
+        var mensaje = document.getElementById("data").value;
+        axios.post(url,{"mensaje" : mensaje , "fecha" : " "})
             .then(res => {
+                    console.log(mensaje);
                     getMessages();
                 }
             )
@@ -15,10 +15,11 @@ var apiclient = (function () {
         $("#messages > tbody").empty();
         axios.get(url).then(res=>{
             console.log(res.data)
-            res.data.mensajes.map(message=>{
+            res.data.map((message,index)=>{
+                index +=1;
                 $("#messages > tbody").append(
                     "<tr>" +
-                    "<th scope='row'>"+ (conta+1) + "</th>"+
+                    "<th scope='row'>"+ index + "</th>"+
                     " <td>" + message.mensaje + "</td>" +
                     "<td>" + message.fecha + "</td> " +
                     "</tr>"
@@ -26,7 +27,6 @@ var apiclient = (function () {
             })
         })
     }
-
     return {
         addMessage : addMessage,
         getMessages:getMessages

@@ -6,42 +6,44 @@
         <title> Messages AREP 2020-2 </title>
         <meta name=viewport content=width=device-width, initial-scale=1.0>
         <script type="text/javascript" src="js/apiclient.js" ></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"> </script>
     </head>
 
     <body onload = "apiclient.getMessages()">
+    <center>
     <h2>LABORATORY 5 AREP 2020-2</h2>
     <p>  Insert a message in order to store it in a Mongo Database <br>
          through a pretty architecture built with Docker ;)
     </p>
     <br>
-    <center>
-        <form onsubmit="this.reset()">
+
+        <form>
               <input type=text name=data id="data" >
               <br>
-              <input type=button value="Send Message" onclick="apiclient.addMessage()">
-            </form>
+              <input type=button value="Send Message" onclick="apiclient.addMessage(); $('#data').val('')">
+        </form>
         <p>If you click the Submit button, the form-data will be sent your message through a POST request </p>
         <br>
         <br>
         <br>
-        <p> These are the last 10 messages published on this website </p>
-
-        <table class="table table-striped" id="messages">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Message</th>
-                <th scope="col">Date</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
+        <h3> These are the last 10 messages published on this website!!! </h3>
+        <center>
+            <table class="table table-striped" id="messages" style="width: 50%">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Message</th>
+                    <th scope="col">Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </center>
     </center>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
     </body>
 </html>
