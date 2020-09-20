@@ -1,6 +1,6 @@
 var apiclient = (function () {
 
-    var url = "http://localhost:4567/GetMessages";
+    var url = "/GetMessages";
     function addMessage (){
         var mensaje = document.getElementById("data").value;
         axios.post(url,{"mensaje" : mensaje , "fecha" : " "})
