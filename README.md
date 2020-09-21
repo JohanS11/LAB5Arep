@@ -1,84 +1,130 @@
-# INTRODUCTION TO COMPUTER SYSTEM DESIGN
+# Modularization Workshop with Virtualization and Introduction to Docker and AWS
 
 ## Description
 
-  This program calculates the mean and the standard deviation via manual implementation of LinkedLists <br>
-  It reads the data from this webpage [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://enigmatic-fjord-20501.herokuapp.com/inputdata).
-  
-  This project has continuos integration via **CircleCi** [![CircleCI](https://circleci.com/gh/JohanS11/LAB2-AREP.svg?style=svg)](https://circleci.com/gh/JohanS11/LAB2-AREP)
+  This workshop consists in creating an architecture that contains a load balancer,
+  3 nodes that handle REST requests and a node that contains a mongo database.
+  Each node represents a container in Docker.
  
 ## Design 
 
   This is the intended design for this project
   
-  ![uml](img/uml.png)
+  ![com](imgs/comp.jpg)
+    
+### Class Diagram
   
-  ![comp](img/comp.png)
+  **Load Balancer**
   
-
+  ![uml](imgs/classLoad.jpg)
+  
+  **REST Server**
+  
+  ![uml](imgs/classRest.jpg)
+  
+  
 ## User's guide
 
   This is the guide that will setup this proyect at your local machine in order to be able to run it.
   
-  ### Requisites
+  ### Prerequisites
   
   It is necessary having these tools installed on your computer:
   
-  * Maven 
-  * Java 
+  * Docker
+  * Docker-compose
   * Git
  
-  ### Setting up
+  ### Setting up this project at your local machine
+
+1. **Download these docker images**
+
+```sh
+  $ docker pull chan1100/lab5arep
+  $ docker pull chan1100/webdocker
+```
   
-1. **Clone this repository:** 
+2. **Clone this repository:** 
 
-   `git clone https://github.com/JohanS11/Taller1Arep.git`
+```sh
+  $ git clone https://github.com/JohanS11/LAB5Arep.git 
+```
 
-2. **Build the project with maven:**
-  
-    `cd LAB2-AREP && mvn package`
+3. **Go to the docker-compose directory**
 
-3. **Execute the project with maven:**
+ ```sh
+  $ cd docker-compose
+```
 
-    `mvn exec:java -Dexec.mainClass="edu.eci.arep.sparkwebapp.SparkWebApp" `
-    
-    now you can navigate trough your brower at http://localhost:4567/inputdata
-    
-   ### Architecture Description
+4. **Execute the docker-compose.yml file**
+
+ ```sh
+  $ docker-compose up -d --scale web=3
+```
+
+5. **Now you should be able to see this project at http://ec2-3-82-154-139.compute-1.amazonaws.com:9001/?data=4**
+
+ ### Architecture Description
+
+   You can find the architecture description of this project at [Architecture Description](https://github.com/JohanS11/LAB5Arep/blob/master/LAB5Arep.pdf)
+
+   ### Testing the application
    
-   You can find the architecture description of this project at [Architecture Description](https://github.com/JohanS11/LAB2-AREP/blob/master/Architecture%20Description.pdf)
-
-   ### Executing tests
+   ***Web App running on AWS with the architecture described***
    
-     In order to run the tests developed with JUnit you have run the follow command:
-     
-     `mvn test`
-     
-     ### Tests coverage
-     
-     ![test3](img/testCoverage.png)
-     
+   ![uml](imgs/web.jpg)
+   
+   
+   ***Load Balancing logs***
+   
+   ![uml](imgs/loadBalancing.jpg)
+   
+   ***docker images and docker container ls on the EC2 instance***
+   
+   ![uml](imgs/IMAGES.jpg)
+       
   ## This project was built with:
   
-   - Apache Maven 3.6.3 
+   - Apache Maven 3.6.3
+   - Docker 
+   - Spark web
    - Java 1.8.0_211
    - Git 2.26.2
+   - AWS (EC2)
    
-  ## POC Heroku App 
+  ## Docker Cheat Sheet
   
-  ![poc1](img/poc1.png)
+  ***List all containers***
   
-  ![poc2](img/poc2.png)
-    
-   In case that you try interesting things (;
+ ```sh
+  $ docker container ls 
+  $ docker ps -a (List all containers not just running)
+```
+
+***List all images***
+  
+  ```sh
+  $ docker images  
+```
+
+***Build an image from the Dockerfile***
+  
+  ```sh
+  $ docker build -t <myimage> 
+```
+***Run a container***
+
+  ```sh
+  $ docker run -d -p <localport>:<containerport> --name firstdockercontainer <image> 
+```
+***Run a docker-compose with 3 instances of web***
+
+```sh
+  $ docker-compose up -d --scale web=3
+```
+[Here is a batch scrip to reset all the stuff :=)](https://github.com/JohanS11/LAB5Arep/blob/master/docker-compose/docker-reset.sh)
+  
    
-  ![poc3](img/poc3.png)
-  
-  ## Java Documentation
-  
-  In order to get additional information about this project you can use JavaDoc to get the Documentation.
-  The documentation of this project is located in this [site](https://johans11.github.io/LAB2-AREP/project-reports.html)
-  
   ## Author
   
   Johan Sebastian Arias Amador ([JohanS11](https://github.com/JohanS11))
