@@ -70,7 +70,7 @@
 
    ### Testing the application
    
-   ***Web App running on AWS with the architecture described***
+   ***Web App running on AWS with the describedarchitecture ***
    
    ![uml](imgs/web.jpg)
    
@@ -121,6 +121,12 @@
 
 ```sh
   $ docker-compose up -d --scale web=3
+```
+
+***Get a shell into the container***
+
+```sh
+  $ docker exec -it <docker ID> /bin/bash
 ```
 [Here is a batch scrip to reset all the stuff :=)](https://github.com/JohanS11/LAB5Arep/blob/master/docker-compose/docker-reset.sh)
   
