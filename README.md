@@ -11,6 +11,15 @@
   This is the intended design for this project
   
   ![com](imgs/comp.jpg)
+ 
+## CI/CD 
+
+This project has continuos integration via 
+
+**CircleCi LoadBalancer** [![CircleCI](https://circleci.com/gh/JohanS11/LAB2-AREP.svg?style=svg)](https://app.circleci.com/pipelines/github/JohanS11/LoadBalancer)
+
+**CircleCi RESTServer** [![CircleCI](https://circleci.com/gh/JohanS11/LAB2-AREP.svg?style=svg)](https://app.circleci.com/pipelines/github/JohanS11/RESTServer)
+
     
 ### Class Diagram
   
